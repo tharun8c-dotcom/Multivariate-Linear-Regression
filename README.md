@@ -19,36 +19,32 @@ Predict the output for the given input values and display the predicted result.
 
 
 ## Program:
-```
-
+```Python
 #Developed by: R Tharun Rathish
 #RegisterNumber: 212225230284
-import numpy as np
-X = np.array(eval(input()))
-Y = np.array(eval(input()))
-X_mean = np.mean(X)
-Y_mean = np.mean(Y)
-num = 0
-den = 0
-for i in range(len(X)):
-    num += (X[i] - X_mean) * (Y[i] - Y_mean)
-    den += (X[i] - X_mean) ** 2
-m = num / den
-c = Y_mean - m * X_mean
-print(m, c)
-Y_pred = m * X + c
-print(Y_pred)
-
-
-
-
+import pandas as pd
+from sklearn.linear_model import LinearRegression
+data = {
+    'Weight': [790, 1160, 929, 865, 1140, 929, 1109, 1365],
+    'Volume': [1000, 1200, 1000, 900, 1500, 1000, 1400, 1500],
+    'CO2': [99, 95, 95, 90, 105, 98, 99, 104]
+}
+df = pd.DataFrame(data)
+X = df[['Weight', 'Volume']]
+y = df['CO2']
+model = LinearRegression()
+model.fit(X, y)
+print("Coefficients:", model.coef_)
+print("Intercept:", model.intercept_)
+input_data = pd.DataFrame([[3300, 1300]], columns=['Weight', 'Volume'])
+predictedCO2 = model.predict(input_data)
+print("Predicted CO2 for the corresponding weight and volume:", predictedCO2[0])
 ```
 ## Output:
 
-<img width="365" height="98" alt="image" src="https://github.com/user-attachments/assets/437f19dc-556f-4437-aeec-ceb50779cd6b" />
+<img width="1036" height="471" alt="WhatsApp Image 2026-05-29 at 11 25 53" src="https://github.com/user-attachments/assets/f7472706-e98e-440b-8443-6cf92cb8f1f0" />
+<img width="1045" height="109" alt="WhatsApp Image 2026-05-29 at 11 26 05" src="https://github.com/user-attachments/assets/18b93541-b9eb-4614-9c73-79365c6a63ff" />
 
-
-<br>
 
 ## Result
 Thus the multivariate linear regression is implemented and predicted the output using python program.
